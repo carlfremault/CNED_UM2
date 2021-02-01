@@ -8,49 +8,51 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controleur.Controle;
+
 /**
- * Frame de l'entrée dans le jeu (choix entre serveur et client)
+ * Frame de l'entrï¿½e dans le jeu (choix entre serveur et client)
  * @author emds
  *
  */
 public class EntreeJeu extends JFrame {
 
 	/**
-	 * Panel général
+	 * Panel gï¿½nï¿½ral
 	 */
 	private JPanel contentPane;
 	/**
 	 * Zone de saisie de l'IP
 	 */
 	private JTextField txtIp;
+	
+	private Controle controle;
 
 	/**
 	 * clic sur le bouton Start pour lancer le serveur
 	 */
 	private void btnStart_clic() {
-		(new Arene()).setVisible(true);
-		this.dispose();
+		controle.evenementEntreeJeu("serveur");
 	}
 	
 	/**
-	 * clic sur le bouton Exit pour arrêter l'application
+	 * clic sur le bouton Exit pour arrï¿½ter l'application
 	 */
 	private void btnExit_clic() {
 		System.exit(0);
 	}
 	
 	/**
-	 * clic sur le bouton Connect pour se connecter à un serveur
+	 * clic sur le bouton Connect pour se connecter ï¿½ un serveur
 	 */
 	private void btnConnect_clic() {
-		(new ChoixJoueur()).setVisible(true);
-		this.dispose();
+		controle.evenementEntreeJeu(this.txtIp.getText());
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public EntreeJeu() {
+	public EntreeJeu(Controle controle) {
 		setResizable(false);
 		setTitle("Urban Marginal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,6 +108,8 @@ public class EntreeJeu extends JFrame {
 		});
 		btnExit.setBounds(186, 91, 89, 23);
 		contentPane.add(btnExit);
+		
+		this.controle = controle;
 	}
 
 }
