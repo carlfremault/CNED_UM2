@@ -2,8 +2,10 @@ package controleur;
 
 import vue.EntreeJeu;
 
+// Test nouvelle branche
+
 /**
- * Contrôleur et point d'entrée de l'applicaton 
+ * Contrï¿½leur et point d'entrï¿½e de l'applicaton 
  * @author emds
  *
  */
@@ -12,8 +14,8 @@ public class Controle {
 	private EntreeJeu frmEntreeJeu ;
 
 	/**
-	 * Méthode de démarrage
-	 * @param args non utilisé
+	 * Mï¿½thode de dï¿½marrage
+	 * @param args non utilisï¿½
 	 */
 	public static void main(String[] args) {
 		new Controle();
