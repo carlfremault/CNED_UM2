@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import controleur.Global;
 
+
 /**
  * frame de l'ar�ne du jeu
  * 
@@ -26,6 +27,10 @@ public class Arene extends JFrame implements Global {
 	 */
 	private JPanel contentPane;
 	/**
+	 * Panel murs
+	 */
+	private JPanel jpnMurs;
+	/**
 	 * Zone de saisie du t'chat
 	 */
 	private JTextField txtSaisie;
@@ -33,13 +38,35 @@ public class Arene extends JFrame implements Global {
 	 * Zone d'affichage du t'chat
 	 */
 	private JTextArea txtChat;
+	
+	/**
+	 * ajout murs
+	 * @param unMur mur à ajouter
+	 */
+	public void ajoutMurs(Object unMur) {
+		jpnMurs.add((JLabel)unMur);
+		jpnMurs.repaint();
+	}
+	/**
+	 * @return jpnMurs
+	 */
+	public JPanel getJpnMurs() {
+		return jpnMurs;
+	}
+	/**
+	 * @param jpnMurs panel a ajouter
+	 */
+	public void setJpnMurs(JPanel jpnMurs) {
+		this.jpnMurs.add(jpnMurs);
+		this.jpnMurs.repaint();
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Arene() {
 		// Dimension de la frame en fonction de son contenu
-		this.getContentPane().setPreferredSize(new Dimension(800, 600 + 25 + 140));
+		this.getContentPane().setPreferredSize(new Dimension(LARGEURARENE, HAUTEURARENE + 25 + 140));
 		this.pack();
 		// interdiction de changer la taille
 		this.setResizable(false);
@@ -49,6 +76,12 @@ public class Arene extends JFrame implements Global {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		jpnMurs = new JPanel();
+		jpnMurs.setBounds(0, 0, LARGEURARENE, HAUTEURARENE);
+		jpnMurs.setOpaque(false);
+		jpnMurs.setLayout(null);
+		contentPane.add(jpnMurs);
 
 		txtSaisie = new JTextField();
 		txtSaisie.setBounds(0, 600, 800, 25);

@@ -27,6 +27,9 @@ public class EntreeJeu extends JFrame {
 	 */
 	private JTextField txtIp;
 
+	/**
+	 * controleur
+	 */
 	private Controle controle;
 
 	/**
@@ -52,6 +55,7 @@ public class EntreeJeu extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param controle instance du controleur
 	 */
 	public EntreeJeu(Controle controle) {
 		setResizable(false);

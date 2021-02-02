@@ -34,11 +34,17 @@ public class ChoixJoueur extends JFrame implements Global {
 	 * Zone de saisie du pseudo
 	 */
 	private JTextField txtPseudo;
-
+	/**
+	 * controleur
+	 */
 	private Controle controle;
-
+	/**
+	 * zone d'affichage du personnage
+	 */
 	private JLabel lblPersonnage;
-
+	/**
+	 * numero du personnage choisi
+	 */
 	private int numeroPersonnage;
 
 	/**
@@ -77,14 +83,23 @@ public class ChoixJoueur extends JFrame implements Global {
 		}
 	}
 
+	/**
+	 * souris affiche pointeur classique
+	 */
 	private void sourisNormale() {
 		contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
+	/**
+	 * souris affiche main pour indiquer zones clic-ables
+	 */
 	private void sourisDoigt() {
 		contentPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
+	/**
+	 * affiche personnage choisie
+	 */
 	private void affichePerso() {
 		String chemin = CHEMINPERSONNAGES + PERSO + this.numeroPersonnage + MARCHE + 1 + "d" + 1 + EXTFICHIERPERSO;
 		URL resource = getClass().getClassLoader().getResource(chemin);
@@ -93,6 +108,7 @@ public class ChoixJoueur extends JFrame implements Global {
 
 	/**
 	 * Create the frame.
+	 * @param controle instance du controleur
 	 */
 	public ChoixJoueur(Controle controle) {
 		// Dimension de la frame en fonction de son contenu

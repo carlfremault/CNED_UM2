@@ -24,6 +24,7 @@ public class JeuServeur extends Jeu implements Global {
 
 	/**
 	 * Constructeur
+	 * @param controle instance du controleur
 	 */
 	public JeuServeur(Controle controle) {
 		super.controle = controle;
@@ -39,7 +40,8 @@ public class JeuServeur extends Jeu implements Global {
 		String[] infos = ((String) info).split(STRINGSEPARE);
 		String ordre = infos[0];
 		switch (ordre) {
-		case "pseudo":
+		case PSEUDO:
+			super.controle.evenementJeuServeur(AJOUTPANELMURS, connection);
 			String pseudo = infos[1];
 			int numPerso = Integer.parseInt(infos[2]);
 			this.lesJoueurs.get(connection).initPerso(pseudo, numPerso);
@@ -62,6 +64,10 @@ public class JeuServeur extends Jeu implements Global {
 	 * G�n�ration des murs
 	 */
 	public void constructionMurs() {
+		for (int i = 0; i < NBMURS; i++) {
+			this.lesMurs.add(new Mur());
+			controle.evenementJeuServeur(AJOUTMUR, lesMurs.get(lesMurs.size()-1).getjLabel());
+		}
 	}
 
 }
