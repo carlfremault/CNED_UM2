@@ -11,15 +11,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controleur.Global;
+
 /**
- * frame de l'arène du jeu
+ * frame de l'arï¿½ne du jeu
  * @author emds
  *
  */
-public class Arene extends JFrame {
+public class Arene extends JFrame implements Global{
 
 	/**
-	 * Panel général
+	 * Panel gï¿½nï¿½ral
 	 */
 	private JPanel contentPane;
 	/**
@@ -61,7 +63,7 @@ public class Arene extends JFrame {
 		jspChat.setViewportView(txtChat);
 		
 		JLabel lblFond = new JLabel("");
-		String chemin = "fonds/fondarene.jpg";
+		String chemin = FONDARENE;
 		URL resource = getClass().getClassLoader().getResource(chemin);
 		lblFond.setIcon(new ImageIcon(resource));		
 		lblFond.setBounds(0, 0, 800, 600);
