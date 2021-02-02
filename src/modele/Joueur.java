@@ -1,30 +1,19 @@
 package modele;
 
+import controleur.Global;
+
 /**
  * Gestion des joueurs
  *
  */
-public class Joueur extends Objet {
-
-	/**
-	 * vie de départ pour tous les joueurs
-	 */
-	private static final int MAXVIE = 10 ;
-	/**
-	 * gain de points de vie lors d'une attaque
-	 */
-	private static final int GAIN = 1 ; 
-	/**
-	 * perte de points de vie lors d'une attaque
-	 */
-	private static final int PERTE = 2 ; 
+public class Joueur extends Objet implements Global {
 	
 	/**
 	 * pseudo saisi
 	 */
 	private String pseudo ;
 	/**
-	 * n° correspondant au personnage (avatar) pour le fichier correspondant
+	 * nï¿½ correspondant au personnage (avatar) pour le fichier correspondant
 	 */
 	private int numPerso ; 
 	/**
@@ -32,7 +21,7 @@ public class Joueur extends Objet {
 	 */
 	private JeuServeur jeuServeur ;
 	/**
-	 * numéro d'étape dans l'animation (de la marche, touché ou mort)
+	 * numï¿½ro d'ï¿½tape dans l'animation (de la marche, touchï¿½ ou mort)
 	 */
 	private int etape ;
 	/**
@@ -44,7 +33,7 @@ public class Joueur extends Objet {
 	 */
 	private int vie ; 
 	/**
-	 * tourné vers la gauche (0) ou vers la droite (1)
+	 * tournï¿½ vers la gauche (0) ou vers la droite (1)
 	 */
 	private int orientation ;
 	
@@ -55,13 +44,17 @@ public class Joueur extends Objet {
 	}
 
 	/**
-	 * Initialisation d'un joueur (pseudo et numéro, calcul de la 1ère position, affichage, création de la boule)
+	 * Initialisation d'un joueur (pseudo et numï¿½ro, calcul de la 1ï¿½re position, affichage, crï¿½ation de la boule)
 	 */
-	public void initPerso() {
+	public void initPerso(String pseudo, int numPerso) {
+		this.pseudo = pseudo;
+		this.numPerso = numPerso;
+		// System.out.println("joueur "+pseudo+" - num perso "+numPerso+" crÃ©Ã©");
+		System.out.println("joueur "+pseudo+" - num perso "+numPerso+" crÃ©Ã©");
 	}
 
 	/**
-	 * Calcul de la première position aléatoire du joueur (sans chevaucher un autre joueur ou un mur)
+	 * Calcul de la premiï¿½re position alï¿½atoire du joueur (sans chevaucher un autre joueur ou un mur)
 	 */
 	private void premierePosition() {
 	}
@@ -73,19 +66,19 @@ public class Joueur extends Objet {
 	}
 
 	/**
-	 * Gère une action reçue et qu'il faut afficher (déplacement, tire de boule...)
+	 * Gï¿½re une action reï¿½ue et qu'il faut afficher (dï¿½placement, tire de boule...)
 	 */
 	public void action() {
 	}
 
 	/**
-	 * Gère le déplacement du personnage
+	 * Gï¿½re le dï¿½placement du personnage
 	 */
 	private void deplace() { 
 	}
 
 	/**
-	 * Contrôle si le joueur touche un des autres joueurs
+	 * Contrï¿½le si le joueur touche un des autres joueurs
 	 * @return true si deux joueurs se touchent
 	 */
 	private Boolean toucheJoueur() {
@@ -93,7 +86,7 @@ public class Joueur extends Objet {
 	}
 
 	/**
-	* Contrôle si le joueur touche un des murs
+	* Contrï¿½le si le joueur touche un des murs
 	 * @return true si un joueur touche un mur
 	 */
 	private Boolean toucheMur() {
@@ -101,19 +94,19 @@ public class Joueur extends Objet {
 	}
 	
 	/**
-	 * Gain de points de vie après avoir touché un joueur
+	 * Gain de points de vie aprï¿½s avoir touchï¿½ un joueur
 	 */
 	public void gainVie() {
 	}
 	
 	/**
-	 * Perte de points de vie après avoir été touché 
+	 * Perte de points de vie aprï¿½s avoir ï¿½tï¿½ touchï¿½ 
 	 */
 	public void perteVie() {
 	}
 	
 	/**
-	 * vrai si la vie est à 0
+	 * vrai si la vie est ï¿½ 0
 	 * @return true si vie = 0
 	 */
 	public Boolean estMort() {
@@ -121,7 +114,7 @@ public class Joueur extends Objet {
 	}
 	
 	/**
-	 * Le joueur se déconnecte et disparait
+	 * Le joueur se dï¿½connecte et disparait
 	 */
 	public void departJoueur() {
 	}

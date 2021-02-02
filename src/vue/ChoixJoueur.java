@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controleur.Controle;
+import controleur.Global;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -22,7 +23,7 @@ import javax.swing.SwingConstants;
  * @author emds
  *
  */
-public class ChoixJoueur extends JFrame {
+public class ChoixJoueur extends JFrame implements Global {
 
 	/**
 	 * Panel g�n�ral
@@ -38,7 +39,7 @@ public class ChoixJoueur extends JFrame {
 	private JLabel lblPersonnage;
 	
 	private int numeroPersonnage;
-	private static final int NOMBREPERSONNAGES = 3;
+
 	
 	
 
@@ -87,7 +88,7 @@ public class ChoixJoueur extends JFrame {
 	}
 	
 	private void affichePerso() {
-		String chemin = "personnages/perso"+this.numeroPersonnage+"marche"+1+"d"+1+".gif";
+		String chemin = CHEMINPERSONNAGES+PERSO+this.numeroPersonnage+MARCHE+1+"d"+1+EXTFICHIERPERSO;
 		URL resource = getClass().getClassLoader().getResource(chemin);
 		lblPersonnage.setIcon(new ImageIcon(resource));	
 	}
@@ -176,7 +177,7 @@ public class ChoixJoueur extends JFrame {
 		
 		JLabel lblFond = new JLabel("");
 		lblFond.setBounds(0, 0, 400, 275);
-		String chemin = "fonds/fondchoix.jpg";
+		String chemin = FONDCHOIX;
 		URL resource = getClass().getClassLoader().getResource(chemin);
 		lblFond.setIcon(new ImageIcon(resource));		
 		contentPane.add(lblFond);
