@@ -15,10 +15,11 @@ import controleur.Global;
 
 /**
  * frame de l'ar�ne du jeu
+ * 
  * @author emds
  *
  */
-public class Arene extends JFrame implements Global{
+public class Arene extends JFrame implements Global {
 
 	/**
 	 * Panel g�n�ral
@@ -31,7 +32,7 @@ public class Arene extends JFrame implements Global{
 	/**
 	 * Zone d'affichage du t'chat
 	 */
-	private JTextArea txtChat ;
+	private JTextArea txtChat;
 
 	/**
 	 * Create the frame.
@@ -39,36 +40,36 @@ public class Arene extends JFrame implements Global{
 	public Arene() {
 		// Dimension de la frame en fonction de son contenu
 		this.getContentPane().setPreferredSize(new Dimension(800, 600 + 25 + 140));
-	    this.pack();
-	    // interdiction de changer la taille
+		this.pack();
+		// interdiction de changer la taille
 		this.setResizable(false);
-		
+
 		setTitle("Arena");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-	
+
 		txtSaisie = new JTextField();
 		txtSaisie.setBounds(0, 600, 800, 25);
 		contentPane.add(txtSaisie);
 		txtSaisie.setColumns(10);
-		
+
 		JScrollPane jspChat = new JScrollPane();
 		jspChat.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		jspChat.setBounds(0, 625, 800, 140);
 		contentPane.add(jspChat);
-		
+
 		txtChat = new JTextArea();
 		jspChat.setViewportView(txtChat);
-		
+
 		JLabel lblFond = new JLabel("");
 		String chemin = FONDARENE;
 		URL resource = getClass().getClassLoader().getResource(chemin);
-		lblFond.setIcon(new ImageIcon(resource));		
+		lblFond.setIcon(new ImageIcon(resource));
 		lblFond.setBounds(0, 0, 800, 600);
 		contentPane.add(lblFond);
-		
+
 	}
 
 }

@@ -15,41 +15,42 @@ import java.net.URL;
 public class Son implements Serializable {
 
 	/**
-	 * son qui peut être joué
+	 * son qui peut ï¿½tre jouï¿½
 	 */
-    private Sound sound ;
+	private Sound sound;
 
-    /**
-     * Création d'un objet de type Sound, à partir d'un fichier de son
-     * @param nomfic url du fichier
-     */
-    public Son (URL nomfic) {
-        try {
+	/**
+	 * Crï¿½ation d'un objet de type Sound, ï¿½ partir d'un fichier de son
+	 * 
+	 * @param nomfic url du fichier
+	 */
+	public Son(URL nomfic) {
+		try {
 //            this.sound = new Sound(new File(nomfic));
-            this.sound = new Sound(nomfic);
-        } catch (SonException ex) {
-        }
-    }
+			this.sound = new Sound(nomfic);
+		} catch (SonException ex) {
+		}
+	}
 
-    /**
-     * Joue le son une fois
-     */
-    public void play() {
-        this.sound.boucle(1) ;
-    }
+	/**
+	 * Joue le son une fois
+	 */
+	public void play() {
+		this.sound.boucle(1);
+	}
 
-    /**
-     * ferme le son (libère l'objet de la mémoire)
-     */
-    public void close() {
-        this.sound.fermer();
-    }
+	/**
+	 * ferme le son (libï¿½re l'objet de la mï¿½moire)
+	 */
+	public void close() {
+		this.sound.fermer();
+	}
 
-    /**
-     * Joue le son en boucle (musique de fond)
-     */
-    public void playContinue () {
-        sound.boucle() ;
-    }
+	/**
+	 * Joue le son en boucle (musique de fond)
+	 */
+	public void playContinue() {
+		sound.boucle();
+	}
 
 }

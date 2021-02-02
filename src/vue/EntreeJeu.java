@@ -12,6 +12,7 @@ import controleur.Controle;
 
 /**
  * Frame de l'entr�e dans le jeu (choix entre serveur et client)
+ * 
  * @author emds
  *
  */
@@ -25,7 +26,7 @@ public class EntreeJeu extends JFrame {
 	 * Zone de saisie de l'IP
 	 */
 	private JTextField txtIp;
-	
+
 	private Controle controle;
 
 	/**
@@ -34,14 +35,14 @@ public class EntreeJeu extends JFrame {
 	private void btnStart_clic() {
 		controle.evenementEntreeJeu("serveur");
 	}
-	
+
 	/**
 	 * clic sur le bouton Exit pour arr�ter l'application
 	 */
 	private void btnExit_clic() {
 		System.exit(0);
 	}
-	
+
 	/**
 	 * clic sur le bouton Connect pour se connecter � un serveur
 	 */
@@ -60,11 +61,11 @@ public class EntreeJeu extends JFrame {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblStartAServer = new JLabel("Start a server :");
 		lblStartAServer.setBounds(10, 11, 94, 14);
 		contentPane.add(lblStartAServer);
-		
+
 		JButton btnStart = new JButton("Start");
 		btnStart.addMouseListener(new MouseAdapter() {
 			@Override
@@ -74,31 +75,31 @@ public class EntreeJeu extends JFrame {
 		});
 		btnStart.setBounds(186, 7, 89, 23);
 		contentPane.add(btnStart);
-		
+
 		JLabel lblConnectAnExisting = new JLabel("Connect an existing server :");
 		lblConnectAnExisting.setBounds(10, 36, 197, 14);
 		contentPane.add(lblConnectAnExisting);
-		
+
 		JLabel lblIpServer = new JLabel("IP server :");
 		lblIpServer.setBounds(10, 61, 68, 14);
 		contentPane.add(lblIpServer);
-		
+
 		JButton btnConnect = new JButton("Connect");
 		btnConnect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				btnConnect_clic() ;
+				btnConnect_clic();
 			}
 		});
 		btnConnect.setBounds(186, 57, 89, 23);
 		contentPane.add(btnConnect);
-		
+
 		txtIp = new JTextField();
 		txtIp.setText("127.0.0.1");
 		txtIp.setBounds(69, 58, 107, 20);
 		contentPane.add(txtIp);
 		txtIp.setColumns(10);
-		
+
 		JButton btnExit = new JButton("Exit");
 		btnExit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -108,7 +109,7 @@ public class EntreeJeu extends JFrame {
 		});
 		btnExit.setBounds(186, 91, 89, 23);
 		contentPane.add(btnExit);
-		
+
 		this.controle = controle;
 	}
 

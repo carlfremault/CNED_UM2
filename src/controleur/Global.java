@@ -1,11 +1,11 @@
 package controleur;
 
 public interface Global {
-	
+
 	int PORT = 6666;
-	
+
 	int NOMBREPERSONNAGES = 3;
-	
+
 	/**
 	 * Caractère de séparation dans un chemin de fichiers
 	 */
@@ -13,31 +13,31 @@ public interface Global {
 	/**
 	 * Chemin du dossier des images de fonds
 	 */
-	String CHEMINFONDS = "fonds"+CHEMINSEPARATOR;
+	String CHEMINFONDS = "fonds" + CHEMINSEPARATOR;
 	/**
 	 * Chemin du dossier de l'image de la boule
 	 */
-	String CHEMINBOULES = "boules"+CHEMINSEPARATOR;
+	String CHEMINBOULES = "boules" + CHEMINSEPARATOR;
 	/**
 	 * Chemin du dossier de l'image du mur
 	 */
-	String CHEMINMURS = "murs"+CHEMINSEPARATOR;
+	String CHEMINMURS = "murs" + CHEMINSEPARATOR;
 	/**
 	 * Chemin du dossier des images des personnages
 	 */
-	String CHEMINPERSONNAGES = "personnages"+CHEMINSEPARATOR;
+	String CHEMINPERSONNAGES = "personnages" + CHEMINSEPARATOR;
 	/**
 	 * Chemin du dossier des sons
 	 */
-	String CHEMINSONS = "sons"+CHEMINSEPARATOR;
+	String CHEMINSONS = "sons" + CHEMINSEPARATOR;
 	/**
 	 * Chemin de l'image de fond de la vue ChoixJoueur
 	 */
-	String FONDCHOIX = CHEMINFONDS+"fondchoix.jpg";
+	String FONDCHOIX = CHEMINFONDS + "fondchoix.jpg";
 	/**
 	 * Chemin de l'image de fond de la vue Arene
 	 */
-	String FONDARENE = CHEMINFONDS+"fondarene.jpg";
+	String FONDARENE = CHEMINFONDS + "fondarene.jpg";
 	/**
 	 * Extension des fichiers des images des personnages
 	 */
@@ -49,11 +49,11 @@ public interface Global {
 	/**
 	 * Chemin de l'image de la boule
 	 */
-	String BOULE = CHEMINBOULES+"boule.gif";
+	String BOULE = CHEMINBOULES + "boule.gif";
 	/**
 	 * Chemin de l'image du mur
 	 */
-	String MUR = CHEMINMURS+"mur.gif";
+	String MUR = CHEMINMURS + "mur.gif";
 	/**
 	 * état marche du personnage
 	 */
@@ -89,15 +89,14 @@ public interface Global {
 	/**
 	 * vie de départ pour tous les joueurs
 	 */
-	int MAXVIE = 10 ;
+	int MAXVIE = 10;
 	/**
 	 * gain de points de vie lors d'une attaque
 	 */
-	int GAIN = 1 ; 
+	int GAIN = 1;
 	/**
 	 * perte de points de vie lors d'une attaque
 	 */
-	int PERTE = 2 ; 
+	int PERTE = 2;
 
 }
-

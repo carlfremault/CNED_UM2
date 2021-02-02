@@ -11,5 +11,5 @@ public class Mur extends Objet {
 	 */
 	public Mur() {
 	}
-	
+
 }
