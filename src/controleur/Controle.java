@@ -69,7 +69,7 @@ public class Controle implements AsyncResponse, Global {
 			this.leJeu = new JeuServeur(this);
 			// Fermer fenêtre Entree et afficher Arene
 			this.frmEntreeJeu.dispose();
-			this.frmArene = new Arene(this);
+			this.frmArene = new Arene(this, SERVEUR);
 			// construction murs
 			((JeuServeur)leJeu).constructionMurs();
 			this.frmArene.setVisible(true);
@@ -155,7 +155,7 @@ public class Controle implements AsyncResponse, Global {
 				this.leJeu.connexion(connection);
 				// affichages vues
 				this.frmEntreeJeu.dispose();
-				this.frmArene = new Arene(this);
+				this.frmArene = new Arene(this, CLIENT);
 				this.frmChoixJoueur = new ChoixJoueur(this);
 				this.frmChoixJoueur.setVisible(true);
 			} else {

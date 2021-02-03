@@ -30,6 +30,10 @@ public class Arene extends JFrame implements Global {
 	 */
 	private Controle controle;
 	/**
+	 * booleen client pour vérifier si arene client ou serveur
+	 */
+	private boolean client;
+	/**
 	 * Panel g�n�ral
 	 */
 	private JPanel contentPane;
@@ -109,6 +113,7 @@ public class Arene extends JFrame implements Global {
 	 */
 	public void setTxtChat(String txtChat) {
 		this.txtChat.setText(txtChat);
+		this.txtChat.setCaretPosition(this.txtChat.getDocument().getLength());
 	}
 	
 	/**
@@ -119,6 +124,7 @@ public class Arene extends JFrame implements Global {
 //		this.txtChat.append(phrase);
 //		this.txtChat.append("\r\n");
 		this.txtChat.setText(this.txtChat.getText()+phrase+"\r\n");
+		this.txtChat.setCaretPosition(this.txtChat.getDocument().getLength());
 	}
 	
 	/**
@@ -139,7 +145,8 @@ public class Arene extends JFrame implements Global {
 	/**
 	 * Create the frame.
 	 */
-	public Arene(Controle controle) {
+	public Arene(Controle controle, String typeJeu) {
+		this.client = typeJeu.equals(CLIENT);
 		// Dimension de la frame en fonction de son contenu
 		this.getContentPane().setPreferredSize(new Dimension(LARGEURARENE, HAUTEURARENE + 25 + 140));
 		this.pack();
@@ -164,17 +171,19 @@ public class Arene extends JFrame implements Global {
 		jpnMurs.setLayout(null);
 		contentPane.add(jpnMurs);
 
-		txtSaisie = new JTextField();
-		txtSaisie.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				txtSaisie_KeyPressed(e);
-			}
-		});
-		txtSaisie.setBounds(0, 600, 800, 25);
-		contentPane.add(txtSaisie);
-		txtSaisie.setColumns(10);
-
+		if (this.client) {
+			txtSaisie = new JTextField();
+			txtSaisie.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					txtSaisie_KeyPressed(e);
+				}
+			});
+			txtSaisie.setBounds(0, 600, 800, 25);
+			contentPane.add(txtSaisie);
+			txtSaisie.setColumns(10);
+		}
+		
 		JScrollPane jspChat = new JScrollPane();
 		jspChat.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		jspChat.setBounds(0, 625, 800, 140);

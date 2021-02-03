@@ -143,6 +143,10 @@ public interface Global {
 	 */
 	String SERVEUR = "serveur";
 	/**
+	 * message "client" pour client
+	 */
+	String CLIENT = "client";
+	/**
 	 * message "ajout mur" pour ajouter murs
 	 */
 	String AJOUTMUR = "ajout mur";
