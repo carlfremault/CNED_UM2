@@ -18,7 +18,7 @@ public abstract class Objet {
 	 */
 	protected Integer posY;
 	/**
-	 * Jlabel
+	 * Jlabel de l'objet
 	 */
 	protected JLabel jLabel;
 	
@@ -33,7 +33,15 @@ public abstract class Objet {
 	 * @return true si les 2 objets se touchent
 	 */
 	public Boolean toucheObjet(Objet objet) {
-		return null;
+		if (this.jLabel != null && objet != null) {
+			if (this.jLabel.contains(objet.posX, objet.posY) || 
+					this.jLabel.contains((objet.posX + objet.jLabel.getWidth()), objet.posY + objet.jLabel.getHeight()) ||
+					this.jLabel.contains(objet.posX, (objet.posY + objet.jLabel.getHeight())) ||
+					this.jLabel.contains((objet.posX + objet.jLabel.getWidth()), objet.posY)) {
+				return true;
+				}
+			}
+		return false;
 	}
 
 }

@@ -13,6 +13,11 @@ import outils.connexion.Connection;
 public class JeuClient extends Jeu implements Global {
 
 	private Connection connection;
+	
+	/**
+	 * booleen pour vérifier si panel des murs est bien reçu
+	 */
+	private boolean mursOk = false;
 
 	/**
 	 * Controleur
@@ -30,8 +35,15 @@ public class JeuClient extends Jeu implements Global {
 	@Override
 	public void reception(Connection connection, Object info) {
 		if (info instanceof JPanel) {
-			this.controle.evenementJeuClient(AJOUTPANELMURS, info);
-			
+			if (!mursOk) {
+				this.controle.evenementJeuClient(AJOUTPANELMURS, info);
+				mursOk = true;
+			} else {
+				this.controle.evenementJeuClient(MODIFPANELJEU, info);
+			}
+		}
+		if (info instanceof String) {
+			this.controle.evenementJeuClient(MODIFCHAT, info);
 		}
 	}
 

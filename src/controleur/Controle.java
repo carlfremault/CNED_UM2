@@ -4,6 +4,7 @@ import vue.Arene;
 import vue.ChoixJoueur;
 import vue.EntreeJeu;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import modele.Jeu;
@@ -68,7 +69,7 @@ public class Controle implements AsyncResponse, Global {
 			this.leJeu = new JeuServeur(this);
 			// Fermer fenêtre Entree et afficher Arene
 			this.frmEntreeJeu.dispose();
-			this.frmArene = new Arene();
+			this.frmArene = new Arene(this);
 			// construction murs
 			((JeuServeur)leJeu).constructionMurs();
 			this.frmArene.setVisible(true);
@@ -105,16 +106,41 @@ public class Controle implements AsyncResponse, Global {
 		case AJOUTPANELMURS :
 			this.leJeu.envoi((Connection)info, this.frmArene.getJpnMurs());
 			break;
+		case AJOUTJLABELJEU :
+			this.frmArene.ajoutJLabelJeu((JLabel) info);
+			break;
+		case MODIFPANELJEU :
+			this.leJeu.envoi((Connection)info, this.frmArene.getJpnJeu());
+			break;
+		case AJOUTPHRASE :
+			this.frmArene.ajoutChat((String) info);
+			((JeuServeur)this.leJeu).envoi(frmArene.getTxtChat());
+			break;
 		}
 	}
 	
+	/**
+	 * demande du JeuClient
+	 * @param ordre ordre à executer
+	 * @param info information à traiter
+	 */
 	public void evenementJeuClient(String ordre, Object info) {
 		switch(ordre ) {
 		case AJOUTPANELMURS :
 			this.frmArene.setJpnMurs((JPanel)info);
 			break;
+		case MODIFPANELJEU :
+			this.frmArene.setJpnJeu((JPanel)info);
+			break;
+		case MODIFCHAT :
+			this.frmArene.setTxtChat((String)info);
 		}
 	}
+	
+	public void evenementArene(String info) {
+		((JeuClient)this.leJeu).envoi(CHAT+STRINGSEPARE+info);
+	}
+	
 	/**
 	 * reception de communications
 	 */
@@ -129,7 +155,7 @@ public class Controle implements AsyncResponse, Global {
 				this.leJeu.connexion(connection);
 				// affichages vues
 				this.frmEntreeJeu.dispose();
-				this.frmArene = new Arene();
+				this.frmArene = new Arene(this);
 				this.frmChoixJoueur = new ChoixJoueur(this);
 				this.frmChoixJoueur.setVisible(true);
 			} else {

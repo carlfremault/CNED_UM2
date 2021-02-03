@@ -1,5 +1,14 @@
 package modele;
 
+import java.awt.Font;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 import controleur.Global;
 
 /**
@@ -12,6 +21,17 @@ public class Joueur extends Objet implements Global {
 	 * pseudo saisi
 	 */
 	private String pseudo;
+	/**
+	 * getter pour pseudo
+	 * @return pseudo
+	 */
+	public String getPseudo() {
+		return pseudo;
+	}
+	/**
+	 * message perso (pseudo et vie)
+	 */
+	private JLabel messagePerso;
 	/**
 	 * n� correspondant au personnage (avatar) pour le fichier correspondant
 	 */
@@ -40,7 +60,11 @@ public class Joueur extends Objet implements Global {
 	/**
 	 * Constructeur
 	 */
-	public Joueur() {
+	public Joueur(JeuServeur jeuServeur) {
+		this.jeuServeur = jeuServeur;
+		this.vie = MAXVIE;
+		this.etape = 1;
+		this.orientation = DROITE;
 	}
 
 	/**
@@ -49,24 +73,45 @@ public class Joueur extends Objet implements Global {
 	 * @param pseudo pseudo du joueur
 	 * @param numPerso numéro du personnage
 	 */
-	public void initPerso(String pseudo, int numPerso) {
+	public void initPerso(String pseudo, int numPerso, ArrayList<Mur> lesMurs, Collection<Joueur> lesJoueurs) {
 		this.pseudo = pseudo;
 		this.numPerso = numPerso;
 		// System.out.println("joueur "+pseudo+" - num perso "+numPerso+" créé");
 		System.out.println("joueur " + pseudo + " - num perso " + numPerso + " créé");
+		super.jLabel = new JLabel();
+		this.messagePerso = new JLabel();
+		messagePerso.setHorizontalAlignment(SwingConstants.CENTER);
+		messagePerso.setFont(new Font("Dialog", Font.PLAIN, 8));
+		this.premierePosition(lesMurs, lesJoueurs);
+		this.jeuServeur.ajoutJLabelJeuArene(jLabel);
+		this.jeuServeur.ajoutJLabelJeuArene(messagePerso);
+		this.affiche(MARCHE, this.etape);
 	}
 
 	/**
 	 * Calcul de la premi�re position al�atoire du joueur (sans chevaucher un autre
 	 * joueur ou un mur)
 	 */
-	private void premierePosition() {
+	private void premierePosition(ArrayList<Mur> lesMurs, Collection<Joueur> lesJoueurs) {
+		super.jLabel.setBounds(0, 0, LARGEURPERSO, HAUTEURPERSO);
+		do {
+			this.posX = (int) Math.round(Math.random() * (LARGEURARENE - LARGEURPERSO));
+			this.posY = (int) Math.round(Math.random() * (HAUTEURARENE - HAUTEURPERSO - HAUTEURMESSAGE));
+			
+		} while (this.toucheJoueur(lesJoueurs) || this.toucheMur(lesMurs));
 	}
 
 	/**
 	 * Affiche le personnage et son message
 	 */
-	public void affiche() {
+	public void affiche(String etat, int etape) {
+		super.jLabel.setBounds(posX, posY, LARGEURPERSO, HAUTEURPERSO);
+		String chemin = CHEMINPERSONNAGES + PERSO + this.numPerso + etat + etape + "d" + orientation + EXTFICHIERPERSO;
+		URL resource = getClass().getClassLoader().getResource(chemin);
+		super.jLabel.setIcon(new ImageIcon(resource));
+		this.messagePerso.setBounds(posX - 10, posY + HAUTEURPERSO, LARGEURPERSO + 20, HAUTEURMESSAGE);
+		this.messagePerso.setText(pseudo + " : " + vie);
+		this.jeuServeur.envoiJeuATous();
 	}
 
 	/**
@@ -86,8 +131,15 @@ public class Joueur extends Objet implements Global {
 	 * 
 	 * @return true si deux joueurs se touchent
 	 */
-	private Boolean toucheJoueur() {
-		return null;
+	private Boolean toucheJoueur(Collection<Joueur> lesJoueurs) {
+		for(Joueur unJoueur : lesJoueurs) {
+			if (!this.equals(unJoueur)) {
+				if (super.toucheObjet(unJoueur)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -95,8 +147,13 @@ public class Joueur extends Objet implements Global {
 	 * 
 	 * @return true si un joueur touche un mur
 	 */
-	private Boolean toucheMur() {
-		return null;
+	private Boolean toucheMur(ArrayList<Mur> lesMurs) {
+		for(Mur leMur : lesMurs) {
+			if (super.toucheObjet(leMur)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
