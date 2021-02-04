@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -115,15 +116,64 @@ public class Joueur extends Objet implements Global {
 	}
 
 	/**
-	 * G�re une action re�ue et qu'il faut afficher (d�placement, tire de boule...)
+	 * Gère action à effectuer (deplacement)
+	 * 
+	 * @param action     = l'action à effectuer
+	 * @param lesJoueurs = collection des Joueurs
+	 * @param lesMurs    = collection des Murs
 	 */
-	public void action() {
+	public void action(int action, Collection lesJoueurs, Collection lesMurs) {
+		switch (action) {
+		case KeyEvent.VK_LEFT:
+			this.orientation = GAUCHE;
+			this.posX = deplace(posX, action, -UNPAS, LARGEURARENE - LARGEURPERSO, lesJoueurs, lesMurs);
+			break;
+		case KeyEvent.VK_RIGHT:
+			this.orientation = DROITE;
+			this.posX = deplace(posX, action, UNPAS, LARGEURARENE - LARGEURPERSO, lesJoueurs, lesMurs);
+			break;
+		case KeyEvent.VK_UP:
+			this.posY = deplace(posY, action, -UNPAS, HAUTEURARENE - HAUTEURPERSO - HAUTEURMESSAGE, lesJoueurs,
+					lesMurs);
+			break;
+		case KeyEvent.VK_DOWN:
+			this.posY = deplace(posY, action, UNPAS, HAUTEURARENE - HAUTEURPERSO - HAUTEURMESSAGE, lesJoueurs, lesMurs);
+			break;
+		}
+		this.affiche(MARCHE, this.etape);
 	}
 
 	/**
-	 * G�re le d�placement du personnage
+	 * Gère le déplacement du personnage
+	 * 
+	 * @param position = la position actuelle
+	 * @param action = l'action (direction)
+	 * @param lePas = nombre de pixels
+	 * @param positionMax = position à ne pas dépasser (bord arene)
+	 * @param lesJoueurs collection des joueurs
+	 * @param lesMurs collection des murs
+	 * @return
 	 */
-	private void deplace() {
+	private int deplace(int position,
+			int action,
+			int lePas, 
+			int positionMax, 
+			Collection lesJoueurs, 
+			Collection lesMurs) {
+		int anciennePosition = position;
+		position += lePas;
+		position = Math.max(position, 0);
+		position = Math.min(position, positionMax);
+		if (action==KeyEvent.VK_LEFT || action==KeyEvent.VK_RIGHT) {
+			posX = position ;
+		}else{
+			posY = position ;
+		}
+		if (this.toucheCollectionObjets(lesJoueurs)|| this.toucheCollectionObjets(lesMurs)) {
+			position = anciennePosition;
+		}
+		etape = (etape % NBETAPES) + 1;
+		return position;
 	}
 
 	/**

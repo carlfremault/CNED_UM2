@@ -77,6 +77,7 @@ public class Arene extends JFrame implements Global {
 		this.jpnJeu.removeAll();
 		this.jpnJeu.add(jpnJeu);
 		this.jpnJeu.repaint();
+		this.contentPane.requestFocus();
 	}
 	/**
 	 * ajout murs
@@ -138,9 +139,28 @@ public class Arene extends JFrame implements Global {
 				this.controle.evenementArene(txtSaisie.getText());
 				this.txtSaisie.setText("");
 			}
+			this.contentPane.requestFocus();
 		}
 	}
 	
+	/**
+	 * evenement appui sur une touche dans l'arene
+	 * @param e la touche appuyée
+	 */
+	public void contentPane_KeyPressed(KeyEvent e) {
+		int keyCode = -1;
+		switch(e.getKeyCode()) {
+		case KeyEvent.VK_LEFT :
+		case KeyEvent.VK_RIGHT :
+		case KeyEvent.VK_UP :
+		case KeyEvent.VK_DOWN :
+			keyCode = e.getKeyCode();
+			break;
+		}
+		if (keyCode != -1) {
+			this.controle.evenementArene(keyCode);
+		}
+	}
 
 	/**
 	 * Create the frame.
@@ -158,6 +178,15 @@ public class Arene extends JFrame implements Global {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		if (this.client) {
+			contentPane.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					contentPane_KeyPressed(e);
+				}
+			});
+		}
 		
 		jpnJeu = new JPanel();
 		jpnJeu.setBounds(0, 0, LARGEURARENE, HAUTEURARENE);
@@ -192,6 +221,15 @@ public class Arene extends JFrame implements Global {
 		txtChat = new JTextArea();
 		txtChat.setEditable(false);
 		jspChat.setViewportView(txtChat);
+		
+		if (this.client) {
+			txtChat.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					contentPane_KeyPressed(e);
+				}
+			});
+		}
 
 		JLabel lblFond = new JLabel("");
 		String chemin = FONDARENE;

@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.Collection;
+
 import javax.swing.JLabel;
 
 /**
@@ -32,16 +34,43 @@ public abstract class Objet {
 	 * @param objet contient l'objet � contr�ler
 	 * @return true si les 2 objets se touchent
 	 */
-	public Boolean toucheObjet(Objet objet) {
-		if (this.jLabel != null && objet != null) {
-			if (this.jLabel.contains(objet.posX, objet.posY) || 
-					this.jLabel.contains((objet.posX + objet.jLabel.getWidth()), objet.posY + objet.jLabel.getHeight()) ||
-					this.jLabel.contains(objet.posX, (objet.posY + objet.jLabel.getHeight())) ||
-					this.jLabel.contains((objet.posX + objet.jLabel.getWidth()), objet.posY)) {
-				return true;
+	
+	public Boolean toucheObjet (Objet objet) {
+		if (objet.jLabel==null || objet.jLabel==null) {
+			return false ;
+		}else{
+			return(this.posX+this.jLabel.getWidth()>objet.posX &&
+				this.posX<objet.posX+objet.jLabel.getWidth() && 
+				this.posY+this.jLabel.getHeight()>objet.posY &&
+				this.posY<objet.posY+objet.jLabel.getHeight()) ;
+		}
+	}
+	
+	public boolean toucheCollectionObjets(Collection<Objet> lesObjets) {
+		for(Objet unObjet : lesObjets) {
+			if (!unObjet.equals(this)) {
+				if(this.toucheObjet(unObjet)) {
+					return true;
 				}
 			}
+		}
 		return false;
 	}
+	
+	/**
+	 * Vérifie si l'objet actuel touche un des objets de la collection
+	 * @param lesObjets collection d'objets (murs, joueurs ou boules)
+	 * @return l'objet touché ou null
+	 */
+//	public Objet toucheCollectionObjets (Collection<Objet> lesObjets) {
+//		for (Objet unObjet : lesObjets) {
+//			if (!unObjet.equals(this)) {
+//				if (toucheObjet(unObjet)) {
+//					return unObjet ;
+//				}
+//			}
+//		}
+//		return null ;
+//	}
 
 }

@@ -174,4 +174,16 @@ public interface Global {
 	 * message modification chat
 	 */
 	String MODIFCHAT = "modif chat";
+	/** 
+	 * message action
+	 */
+	String ACTION = "action";
+	/**
+	 * valeur en pixels d'un pas
+	 */
+	int UNPAS = 10;
+	/**
+	 * nombre d'étapes
+	 */
+	int NBETAPES = 4;
 }
