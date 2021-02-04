@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
@@ -23,7 +24,13 @@ public class JeuServeur extends Jeu implements Global {
 	 * Collection de joueurs
 	 */
 	private Hashtable<Connection, Joueur> lesJoueurs = new Hashtable<Connection, Joueur>();
-
+	/**
+	 * getter pour recuperer les joueurs
+	 * @return collection des joueurs
+	 */
+	public Collection getJoueurs() {
+		return lesJoueurs.values();
+	}
 	/**
 	 * Constructeur
 	 * @param controle instance du controleur

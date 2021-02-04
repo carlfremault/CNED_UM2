@@ -27,14 +27,28 @@ public abstract class Objet {
 	public JLabel getjLabel() {
 		return jLabel;
 	}
-
+	
+	/**
+	 * getter pour posX
+	 * @return posX
+	 */
+	public int getPosX() {
+		return posX;
+	}
+	/**
+	 * getter pour posY
+	 * @return posY
+	 */
+	public int getPosY() {
+		return posY;
+	}
+	
 	/**
 	 * contr�le si l'objet actuel touche l'objet pass� en param�tre
 	 * 
 	 * @param objet contient l'objet � contr�ler
 	 * @return true si les 2 objets se touchent
 	 */
-	
 	public Boolean toucheObjet (Objet objet) {
 		if (objet.jLabel==null || objet.jLabel==null) {
 			return false ;
@@ -46,31 +60,20 @@ public abstract class Objet {
 		}
 	}
 	
-	public boolean toucheCollectionObjets(Collection<Objet> lesObjets) {
-		for(Objet unObjet : lesObjets) {
-			if (!unObjet.equals(this)) {
-				if(this.toucheObjet(unObjet)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
 	/**
 	 * Vérifie si l'objet actuel touche un des objets de la collection
 	 * @param lesObjets collection d'objets (murs, joueurs ou boules)
 	 * @return l'objet touché ou null
 	 */
-//	public Objet toucheCollectionObjets (Collection<Objet> lesObjets) {
-//		for (Objet unObjet : lesObjets) {
-//			if (!unObjet.equals(this)) {
-//				if (toucheObjet(unObjet)) {
-//					return unObjet ;
-//				}
-//			}
-//		}
-//		return null ;
-//	}
+	public Objet toucheCollectionObjets (Collection<Objet> lesObjets) {
+		for (Objet unObjet : lesObjets) {
+			if (!unObjet.equals(this)) {
+				if (toucheObjet(unObjet)) {
+					return unObjet ;
+				}
+			}
+		}
+		return null ;
+	}
 
 }
