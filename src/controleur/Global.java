@@ -31,6 +31,54 @@ public interface Global {
 	 */
 	String CHEMINSONS = "sons" + CHEMINSEPARATOR;
 	/**
+	 * son welcome
+	 */
+	String SONWELCOME = CHEMINSONS+"welcome.wav";
+	/**
+	 * son precedent
+	 */
+	String SONPRECEDENT = CHEMINSONS+"precedent.wav";
+	/**
+	 * son suivant
+	 */
+	String SONSUIVANT = CHEMINSONS+"suivant.wav";
+	/**
+	 * son go
+	 */
+	String SONGO = CHEMINSONS+"go.wav";
+	/**
+	 * son ambiance
+	 */
+	String SONAMBIANCE = CHEMINSONS+"ambiance.wav";
+	/**
+	 * son death
+	 */
+	String SONDEATH = CHEMINSONS+"death.wav";
+	/**
+	 * son fight
+	 */
+	String SONFIGHT = CHEMINSONS+"fight.wav";
+	/**
+	 * son hurt
+	 */
+	String SONHURT = CHEMINSONS+"hurt.wav";
+	/**
+	 * tableau avec les sons arene
+	 */
+	String [] SONS = {CHEMINSONS + "fight.wav", CHEMINSONS + "hurt.wav", CHEMINSONS + "death.wav"};
+	/**
+	 * int pour appeler son fight
+	 */
+	int FIGHT = 0;
+	/**
+	 * int pour appeler son hurt
+	 */
+	int HURT = 1;
+	/**
+	 * int pour appeler son death
+	 */
+	int DEATH = 2;
+	/**
 	 * Chemin de l'image de fond de la vue ChoixJoueur
 	 */
 	String FONDCHOIX = CHEMINFONDS + "fondchoix.jpg";
@@ -178,6 +226,10 @@ public interface Global {
 	 * message action
 	 */
 	String ACTION = "action";
+	/**
+	 * message joue son
+	 */
+	String JOUESON = "joue son";
 	/**
 	 * valeur en pixels d'un pas
 	 */

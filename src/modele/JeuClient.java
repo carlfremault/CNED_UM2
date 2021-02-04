@@ -41,9 +41,10 @@ public class JeuClient extends Jeu implements Global {
 			} else {
 				this.controle.evenementJeuClient(MODIFPANELJEU, info);
 			}
-		}
-		if (info instanceof String) {
+		} else if (info instanceof String) {
 			this.controle.evenementJeuClient(MODIFCHAT, info);
+		} else if (info instanceof Integer) {
+			this.controle.evenementJeuClient(JOUESON, info);
 		}
 	}
 

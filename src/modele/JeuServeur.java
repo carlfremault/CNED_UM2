@@ -76,6 +76,7 @@ public class JeuServeur extends Jeu implements Global {
 	/**
 	 * Envoi d'une information vers tous les clients fais appel plusieurs fois �
 	 * l'envoi de la classe Jeu
+	 * @param info = information à envoyer
 	 */
 	public void envoi(Object info) {
 		for(Connection connection : lesJoueurs.keySet()) {

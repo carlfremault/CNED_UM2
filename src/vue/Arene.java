@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import controleur.Controle;
 import controleur.Global;
+import outils.son.Son;
 
 
 /**
@@ -53,6 +54,10 @@ public class Arene extends JFrame implements Global {
 	 * Zone d'affichage du chat
 	 */
 	private JTextArea txtChat;
+	/**
+	 * tableau avec les sons arene
+	 */
+	private Son[] lesSons = new Son[SONS.length];
 
 	/**
 	 * ajout joueurs, boules
@@ -134,7 +139,7 @@ public class Arene extends JFrame implements Global {
 	 */
 	public void txtSaisie_KeyPressed(KeyEvent e) {
 		if (e.getKeyCode() ==  KeyEvent.VK_ENTER) {
-			System.out.println("enter pressed");
+			// System.out.println("enter pressed");
 			if (!this.txtSaisie.getText().equals("")) {
 				this.controle.evenementArene(txtSaisie.getText());
 				this.txtSaisie.setText("");
@@ -162,9 +167,15 @@ public class Arene extends JFrame implements Global {
 			this.controle.evenementArene(keyCode);
 		}
 	}
-
+	
+	public void joueSon(Integer numSon) {
+		this.lesSons[numSon].play();
+	}
 	/**
 	 * Create the frame.
+	 * 
+	 * @param controle = instance du controleur
+	 * @param typeJeu = client ou serveur
 	 */
 	public Arene(Controle controle, String typeJeu) {
 		this.client = typeJeu.equals(CLIENT);
@@ -230,6 +241,12 @@ public class Arene extends JFrame implements Global {
 					contentPane_KeyPressed(e);
 				}
 			});
+		}
+		
+		if (this.client) {
+			for (int i = 0; i < SONS.length; i++) {
+				lesSons[i] = new Son(getClass().getClassLoader().getResource(SONS[i]));
+			}
 		}
 
 		JLabel lblFond = new JLabel("");

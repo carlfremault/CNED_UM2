@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import controleur.Controle;
 import controleur.Global;
+import outils.son.Son;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -46,6 +47,11 @@ public class ChoixJoueur extends JFrame implements Global {
 	 * numero du personnage choisi
 	 */
 	private int numeroPersonnage;
+	
+	private Son welcome;
+	private Son precedent;
+	private Son suivant;
+	private Son go;
 
 	/**
 	 * Clic sur la fl�che "pr�c�dent" pour afficher le personnage pr�c�dent
@@ -57,6 +63,7 @@ public class ChoixJoueur extends JFrame implements Global {
 			numeroPersonnage -= 1;
 		}
 		this.affichePerso();
+		precedent.play();
 	}
 
 	/**
@@ -69,6 +76,7 @@ public class ChoixJoueur extends JFrame implements Global {
 			numeroPersonnage += 1;
 		}
 		this.affichePerso();
+		suivant.play();
 	}
 
 	/**
@@ -80,6 +88,7 @@ public class ChoixJoueur extends JFrame implements Global {
 			txtPseudo.requestFocus();
 		} else {
 			controle.evenementChoixJoueur(this.txtPseudo.getText(), numeroPersonnage);
+			go.play();
 		}
 	}
 
@@ -211,5 +220,11 @@ public class ChoixJoueur extends JFrame implements Global {
 		this.numeroPersonnage = 1;
 		this.affichePerso();
 
+		// sons
+		welcome = new Son(getClass().getClassLoader().getResource(SONWELCOME));
+		precedent = new Son(getClass().getClassLoader().getResource(SONPRECEDENT));
+		suivant = new Son(getClass().getClassLoader().getResource(SONSUIVANT));
+		go = new Son(getClass().getClassLoader().getResource(SONGO));
+		welcome.play();
 	}
 }

@@ -67,6 +67,8 @@ public class Joueur extends Objet implements Global {
 	}
 	/**
 	 * Constructeur
+	 * 
+	 * @param jeuServeur = le serveur pour communiquer
 	 */
 	public Joueur(JeuServeur jeuServeur) {
 		this.jeuServeur = jeuServeur;
@@ -80,6 +82,8 @@ public class Joueur extends Objet implements Global {
 	 * affichage, cr�ation de la boule)
 	 * @param pseudo pseudo du joueur
 	 * @param numPerso numéro du personnage
+	 * @param lesMurs collection des murs
+	 * @param lesJoueurs collection des joueurs
 	 */
 	public void initPerso(String pseudo, int numPerso, Collection lesMurs, Collection lesJoueurs) {
 		this.pseudo = pseudo;
@@ -101,6 +105,8 @@ public class Joueur extends Objet implements Global {
 	/**
 	 * Calcul de la premi�re position al�atoire du joueur (sans chevaucher un autre
 	 * joueur ou un mur)
+	 * @param lesMurs collection des murs
+	 * @param lesJoueurs collection des joueurs
 	 */
 	private void premierePosition(Collection lesMurs, Collection lesJoueurs) {
 		super.jLabel.setBounds(0, 0, LARGEURPERSO, HAUTEURPERSO);
@@ -113,6 +119,9 @@ public class Joueur extends Objet implements Global {
 
 	/**
 	 * Affiche le personnage et son message
+	 * 
+	 * @param etat = etat du joueur (marche, touche, mort)
+	 * @param etape = etape de mouvement
 	 */
 	public void affiche(String etat, int etape) {
 		super.jLabel.setBounds(posX, posY, LARGEURPERSO, HAUTEURPERSO);
@@ -152,7 +161,6 @@ public class Joueur extends Objet implements Global {
 			if (!boule.getjLabel().isVisible()) {
 				this.boule.tireBoule(this, lesMurs);
 			};
-			
 			break;
 		}
 		this.affiche(MARCHE, this.etape);
@@ -167,7 +175,7 @@ public class Joueur extends Objet implements Global {
 	 * @param positionMax = position à ne pas dépasser (bord arene)
 	 * @param lesJoueurs collection des joueurs
 	 * @param lesMurs collection des murs
-	 * @return
+	 * @return nouvelle position
 	 */
 	private int deplace(int position,
 			int action,

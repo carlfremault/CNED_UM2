@@ -28,6 +28,7 @@ public class Boule extends Objet implements Global, Runnable {
 	private Joueur attaquant;
 	/**
 	 * Constructeur
+	 * @param jeuServeur =  serveur pour la communication
 	 */
 	public Boule(JeuServeur jeuServeur) {
 		this.jeuServeur = jeuServeur;
@@ -40,6 +41,9 @@ public class Boule extends Objet implements Global, Runnable {
 
 	/**
 	 * Tire d'une boule
+	 * 
+	 * @param unJoueur = le joueur qui tire
+	 * @param lesMurs = collection des murs
 	 */
 	public void tireBoule(Joueur unJoueur, Collection lesMurs) {
 		this.attaquant = unJoueur;
@@ -55,6 +59,7 @@ public class Boule extends Objet implements Global, Runnable {
 	
 	@Override
 	public void run() {
+		this.jeuServeur.envoi(FIGHT);
 		this.attaquant.affiche(MARCHE, 1);
 		super.jLabel.setVisible(true);
 		Joueur victime = null;
@@ -73,6 +78,7 @@ public class Boule extends Objet implements Global, Runnable {
 			
 		} while ((posX >= 0) && (posX < LARGEURARENE - LARGEURBOULE) && victime == null && (this.toucheCollectionObjets(lesMurs) == null));
 		if (victime != null && !victime.estMort()) {
+			this.jeuServeur.envoi(HURT);
 			victime.perteVie();
 			attaquant.gainVie();
 			for (int i = 1; i <= NBETAPESTOUCHE; i++) {
@@ -80,6 +86,7 @@ public class Boule extends Objet implements Global, Runnable {
 				pause(80, 0);
 			}
 			if (victime.estMort()) {
+				this.jeuServeur.envoi(DEATH);
 				for (int i = 1; i <= NBETAPESMORT; i++) {
 					victime.affiche(MORT, i);
 					pause(80, 0);
