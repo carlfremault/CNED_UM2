@@ -141,29 +141,33 @@ public class Joueur extends Objet implements Global {
 	 * @param lesMurs    = collection des Murs
 	 */
 	public void action(int action, Collection lesJoueurs, Collection lesMurs) {
-		switch (action) {
-		case KeyEvent.VK_LEFT:
-			this.orientation = GAUCHE;
-			this.posX = deplace(posX, action, -UNPAS, LARGEURARENE - LARGEURPERSO, lesJoueurs, lesMurs);
-			break;
-		case KeyEvent.VK_RIGHT:
-			this.orientation = DROITE;
-			this.posX = deplace(posX, action, UNPAS, LARGEURARENE - LARGEURPERSO, lesJoueurs, lesMurs);
-			break;
-		case KeyEvent.VK_UP:
-			this.posY = deplace(posY, action, -UNPAS, HAUTEURARENE - HAUTEURPERSO - HAUTEURMESSAGE, lesJoueurs,
-					lesMurs);
-			break;
-		case KeyEvent.VK_DOWN:
-			this.posY = deplace(posY, action, UNPAS, HAUTEURARENE - HAUTEURPERSO - HAUTEURMESSAGE, lesJoueurs, lesMurs);
-			break;
-		case KeyEvent.VK_SPACE :
-			if (!boule.getjLabel().isVisible()) {
-				this.boule.tireBoule(this, lesMurs);
-			};
-			break;
+		if (!this.estMort()) {
+			switch (action) {
+			case KeyEvent.VK_LEFT:
+				this.orientation = GAUCHE;
+				this.posX = deplace(posX, action, -UNPAS, LARGEURARENE - LARGEURPERSO, lesJoueurs, lesMurs);
+				break;
+			case KeyEvent.VK_RIGHT:
+				this.orientation = DROITE;
+				this.posX = deplace(posX, action, UNPAS, LARGEURARENE - LARGEURPERSO, lesJoueurs, lesMurs);
+				break;
+			case KeyEvent.VK_UP:
+				this.posY = deplace(posY, action, -UNPAS, HAUTEURARENE - HAUTEURPERSO - HAUTEURMESSAGE, lesJoueurs,
+						lesMurs);
+				break;
+			case KeyEvent.VK_DOWN:
+				this.posY = deplace(posY, action, UNPAS, HAUTEURARENE - HAUTEURPERSO - HAUTEURMESSAGE, lesJoueurs,
+						lesMurs);
+				break;
+			case KeyEvent.VK_SPACE:
+				if (!boule.getjLabel().isVisible()) {
+					this.boule.tireBoule(this, lesMurs);
+				}
+				;
+				break;
+			}
+			this.affiche(MARCHE, this.etape);
 		}
-		this.affiche(MARCHE, this.etape);
 	}
 
 	/**
@@ -256,6 +260,12 @@ public class Joueur extends Objet implements Global {
 	 * Le joueur se d�connecte et disparait
 	 */
 	public void departJoueur() {
+		if (super.jLabel != null) {
+			super.jLabel.setVisible(false);
+			this.messagePerso.setVisible(false);
+			this.boule.getjLabel().setVisible(false);
+			this.jeuServeur.envoiJeuATous();
+		}
 	}
 
 }

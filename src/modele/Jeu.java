@@ -25,7 +25,7 @@ public abstract class Jeu {
 	/**
 	 * D�connexion de l'ordinateur distant
 	 */
-	public abstract void deconnexion();
+	public abstract void deconnexion(Connection connection);
 
 	protected Controle controle;
 
